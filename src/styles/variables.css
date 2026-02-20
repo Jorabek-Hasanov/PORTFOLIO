@@ -1,0 +1,109 @@
+/* ==========================================================================
+   Design Tokens - CSS Custom Properties
+   ========================================================================== */
+
+/* Primary Brand Colors */
+:root {
+    /* Primary Orange - Main brand color */
+    --primary-color: #FF823C;
+    --primary-color-hover: #e65f00;
+    --primary-color-light: rgba(255, 130, 60, 0.1);
+    --primary-color-medium: rgba(255, 130, 60, 0.2);
+    --primary-color-light-30: rgba(255, 130, 60, 0.3);
+    --primary-color-light-40: rgba(255, 130, 60, 0.4);
+    --primary-color-light-50: rgba(255, 130, 60, 0.5);
+    
+    /* Background Colors */
+    --bg-black: #0b0b0b;
+    --bg-dark: #121212;
+    --bg-card: #0F0F0F;
+    --bg-input: #1a1a1a;
+    --bg-zinc-900: #111111;
+    
+    /* Border Colors */
+    --border-default: rgba(255, 255, 255, 0.08);
+    --border-white-10: rgba(255, 255, 255, 0.1);
+    --border-white-5: rgba(255, 255, 255, 0.05);
+    
+    /* Text Colors */
+    --text-white: #ffffff;
+    --text-white-90: rgba(255, 255, 255, 0.9);
+    --text-zinc-300: #d4d4d8;
+    --text-zinc-400: #a1a1aa;
+    --text-zinc-500: #71717a;
+    --text-zinc-600: #52525b;
+    
+    /* Glow Effects */
+    --glow-primary: 0 0 20px -5px rgba(255, 106, 0, 0.4);
+    --glow-primary-30: 0 0 30px -5px rgba(255, 130, 60, 0.3);
+    --glow-primary-strong: 0 0 80px -20px rgba(255, 130, 60, 0.5);
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    
+    /* Font Family */
+    --font-family: 'Inter', sans-serif;
+    
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-base: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    --transition-smooth: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Z-Index Scale */
+    --z-dropdown: 1000;
+    --z-sticky: 1020;
+    --z-fixed: 1030;
+    --z-modal-backdrop: 1040;
+    --z-modal: 1050;
+    --z-popover: 1060;
+    --z-tooltip: 1070;
+}
+
+/* Typography Scale */
+:root {
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-3xl: 1.875rem;
+    --text-4xl: 2.25rem;
+    --text-5xl: 3rem;
+    --text-6xl: 3.75rem;
+    --text-7xl: 4.5rem;
+}
+
+/* Spacing Scale */
+:root {
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-20: 5rem;
+    --space-24: 6rem;
+}
+
+/* Border Radius */
+:root {
+    --radius-sm: 0.25rem;
+    --radius-md: 0.375rem;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
+    --radius-2xl: 1rem;
+    --radius-full: 9999px;
+}
+
+/* Breakpoints (for reference in media queries) */
+:root {
+    --breakpoint-sm: 640px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1280px;
+    --breakpoint-2xl: 1536px;
+}

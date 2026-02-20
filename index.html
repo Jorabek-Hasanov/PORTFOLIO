@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Portfolio - AI Vibe Engineer</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="src/styles/main.css">
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            black: '#0b0b0b',
+                            dark: '#121212',
+                            orange: '#ff6a00',
+                            orangeHover: '#e65f00',
+                            border: 'rgba(255, 255, 255, 0.08)',
+                        }
+                    },
+                    boxShadow: {
+                        'glow': '0 0 20px -5px rgba(255, 106, 0, 0.4)',
+                        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-brand-black text-zinc-300 antialiased selection:bg-brand-orange selection:text-white overflow-x-hidden">
+
+    <!-- Navigation Component -->
+    <div id="navigation-container"></div>
+
+    <!-- Main Content -->
+    <main id="app">
+        <!-- Hero Component -->
+        <div id="hero-container"></div>
+        
+        <!-- About Component -->
+        <div id="about-container"></div>
+        
+        <!-- Social Proof Component -->
+        <div id="social-proof-container"></div>
+        
+        <!-- Features Component -->
+        <div id="features-container"></div>
+        
+        <!-- Solutions Component -->
+        <div id="solutions-container"></div>
+        
+        <!-- Tech Stack Component -->
+        <div id="tech-stack-container"></div>
+        
+        <!-- Process Component -->
+        <div id="process-container"></div>
+        
+        <!-- Testimonials Component -->
+        <div id="testimonials-container"></div>
+        
+        <!-- Contact Component -->
+        <div id="contact-container"></div>
+    </main>
+
+    <!-- Footer Component -->
+    <div id="footer-container"></div>
+
+    <!-- App JavaScript -->
+    <script type="module" src="src/app.js"></script>
+    
+    <!-- Initialize Icons (fallback) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    </script>
+
+</body>
+</html>

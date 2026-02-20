@@ -1,0 +1,1437 @@
+<html lang="en" class="scroll-smooth"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PORTFOLIO - SaaS Intelligence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <style>
+        /* Global Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            max-width: 100vw;
+        }
+        
+        body { font-family: 'Inter', sans-serif; }
+        /* Custom scrollbar for ultra-premium feel */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0b0b0b; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #444; }
+        
+        .glass-nav {
+            background: rgba(11, 11, 11, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        
+        /* Tech Stack hover glow effect */
+        .tech-glow {
+            transition: all 0.3s ease-out;
+        }
+        .tech-glow:hover {
+            box-shadow: 0 0 25px -5px rgba(255, 130, 60, 0.4);
+        }
+        
+        /* The Horizon Arc Glow */
+        .horizon-glow {
+            background: radial-gradient(ellipse at center, rgba(255, 106, 0, 0.15) 0%, rgba(11, 11, 11, 0) 70%);
+        }
+        
+        /* Process Section Animations */
+        .process-card {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .process-card.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .process-card:hover {
+            box-shadow: 0 0 25px -5px rgba(255, 130, 60, 0.4);
+            border-color: rgba(255, 130, 60, 0.5);
+        }
+        .process-number {
+            -webkit-text-stroke: 1px rgba(255, 130, 60, 0.1);
+            -webkit-text-fill-color: transparent;
+        }
+        @keyframes float-in {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .process-card.animate {
+            animation: float-in 0.6s ease-out forwards;
+        }
+        
+        /* Responsive Typography */
+        @media (max-width: 640px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+            h3 { font-size: 1.25rem; }
+            p { font-size: 0.9375rem; }
+        }
+        
+        @media (min-width: 641px) and (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+        }
+        
+        /* Ensure no horizontal scroll */
+        @media (max-width: 480px) {
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            section {
+                overflow-x: hidden;
+            }
+            
+            /* Fix for absolute positioned elements causing overflow */
+            .absolute {
+                max-width: 100vw;
+            }
+        }
+        
+        /* Tablet responsiveness */
+        @media (min-width: 481px) and (max-width: 1024px) {
+            section {
+                overflow-x: hidden;
+            }
+        }
+        
+        /* Image responsiveness */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* Form elements responsiveness */
+        input, textarea, select {
+            font-size: 16px; /* Prevents iOS zoom on focus */
+        }
+        
+        /* Navigation menu hover effects */
+        .nav-link {
+            position: relative;
+            color: #71717a;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #FF823C;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: #FF823C;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Mobile menu styles */
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        /* Hero Content - Positioned at top for Hero Vibe */
+        .hero-content {
+            padding-top: 120px;
+            margin-bottom: 20vh;
+        }
+        @media (max-width: 768px) {
+            .hero-content {
+                padding-top: 80px;
+            }
+        }
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        .mobile-menu-overlay {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .mobile-menu-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        .burger-line {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .burger-open .burger-line:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+        .burger-open .burger-line:nth-child(2) {
+            opacity: 0;
+        }
+        .burger-open .burger-line:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            black: '#0b0b0b',
+                            dark: '#121212',
+                            orange: '#ff6a00',
+                            orangeHover: '#e65f00',
+                            border: 'rgba(255, 255, 255, 0.08)',
+                        }
+                    },
+                    boxShadow: {
+                        'glow': '0 0 20px -5px rgba(255, 106, 0, 0.4)',
+                        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-brand-black text-zinc-300 antialiased selection:bg-brand-orange selection:text-white overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-nav border-b border-brand-border overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center gap-2 group cursor-pointer">
+                <div class="w-8 h-8 rounded-lg bg-linear-to-br from-brand-orange to-orange-700 flex items-center justify-center text-white shadow-glow">
+                    <i data-lucide="layers" class="w-5 h-5"></i>
+                </div>
+                <span class="text-white font-medium text-lg tracking-tight group-hover:text-white/90 transition-colors">Portfolio</span>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#hero" class="nav-link text-sm font-normal">Home</a>
+                <a href="#solutions" class="nav-link text-sm font-normal">Solutions</a>
+                <a href="#about" class="nav-link text-sm font-normal">About</a>
+                <a href="#process" class="nav-link text-sm font-normal">Process</a>
+                <a href="#tech-stack" class="nav-link text-sm font-normal">Stack</a>
+                <a href="#feedback" class="nav-link text-sm font-normal">Reviews</a>
+            </div>
+
+            <!-- Desktop Contact Button -->
+            <div class="hidden md:flex items-center gap-4">
+                <a href="#contact" class="text-sm font-medium text-white bg-white/5 hover:bg-white/10 border border-brand-border px-4 py-2 rounded-lg transition-all flex items-center gap-2 group">
+                    Contact
+                </a>
+            </div>
+
+            <!-- Mobile Burger Button -->
+            <button id="burgerBtn" class="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 cursor-pointer" aria-label="Toggle menu">
+                <span class="burger-line w-6 h-0.5 bg-white rounded-full"></span>
+                <span class="burger-line w-6 h-0.5 bg-white rounded-full"></span>
+                <span class="burger-line w-6 h-0.5 bg-white rounded-full"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobileMenuOverlay" class="mobile-menu-overlay fixed inset-0 bg-black/60 z-40 md:hidden"></div>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu fixed top-0 left-0 w-72 h-full bg-brand-dark z-50 md:hidden border-r border-brand-border">
+        <div class="p-6">
+            <!-- Mobile Menu Header -->
+            <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-linear-to-br from-brand-orange to-orange-700 flex items-center justify-center text-white">
+                        <i data-lucide="layers" class="w-5 h-5"></i>
+                    </div>
+                    <span class="text-white font-medium text-lg">Portfolio</span>
+                </div>
+                <button id="closeMobileMenu" class="w-8 h-8 flex items-center justify-center text-zinc-400 hover:text-white transition-colors">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu Links -->
+            <nav class="flex flex-col gap-4">
+                <a href="#hero" class="mobile-nav-link text-base font-normal text-zinc-400 hover:text-[#FF823C] transition-colors py-2 border-b border-brand-border">Home</a>
+                <a href="#solutions" class="mobile-nav-link text-base font-normal text-zinc-400 hover:text-[#FF823C] transition-colors py-2 border-b border-brand-border">Solutions</a>
+                <a href="#about" class="mobile-nav-link text-base font-normal text-zinc-400 hover:text-[#FF823C] transition-colors py-2 border-b border-brand-border">About</a>
+                <a href="#process" class="mobile-nav-link text-base font-normal text-zinc-400 hover:text-[#FF823C] transition-colors py-2 border-b border-brand-border">Process</a>
+                <a href="#tech-stack" class="mobile-nav-link text-base font-normal text-zinc-400 hover:text-[#FF823C] transition-colors py-2 border-b border-brand-border">Stack</a>
+                <a href="#feedback" class="mobile-nav-link text-base font-normal text-zinc-400 hover:text-[#FF823C] transition-colors py-2 border-b border-brand-border">Reviews</a>
+                <a href="#contact" class="mobile-nav-link text-base font-medium text-white bg-brand-orange hover:bg-[#e65f00] transition-colors py-3 px-4 rounded-lg mt-4 text-center">Contact</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Hero Wrapper -->
+    <main id="hero" class="relative min-h-dvh flex flex-col justify-center overflow-hidden">
+        
+        <!-- Background Ambient Effects -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <div class="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[150%] md:w-[800px] h-[500px] md:h-[800px] bg-brand-orange/5 blur-[120px] rounded-full mix-blend-screen"></div>
+            <!-- Starfield specks -->
+            <div class="absolute top-20 left-20 w-1 h-1 bg-white/20 rounded-full blur-[1px]"></div>
+            <div class="absolute top-40 right-1/4 w-1 h-1 bg-white/10 rounded-full"></div>
+            <div class="absolute bottom-1/3 left-10 w-1 h-1 bg-white/10 rounded-full"></div>
+        </div>
+
+        <!-- Content -->
+        <div class="hero-content relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center">
+            
+            <!-- Headline -->
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-semibold tracking-tight text-white leading-[1.15] sm:leading-[1.1] mb-6">
+                Transform Your Data Into <br class="hidden md:block">
+                <span class="text-brand-orange inline-block relative">
+                    Actionable Solutions
+                    <!-- Subtle glow behind text -->
+                    <span class="absolute inset-0 blur-2xl bg-brand-orange/20 -z-10"></span>
+                </span>
+            </h1>
+
+            <!-- Subtext -->
+            <p class="text-base sm:text-lg md:text-xl text-zinc-500 max-w-2xl mb-10 leading-relaxed font-light px-4 sm:px-0">
+                Unlock the full potential of your data with our suite of analytics tools designed for the modern enterprise ecosystem.
+            </p>
+
+        </div>
+
+        <!-- The Horizon Arc (The centerpiece visual) -->
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120%] md:w-[150%] aspect-2/1 rounded-[100%] border-t border-[rgba(255,130,60,0.4)] bg-linear-to-b from-[rgba(255,130,60,0.08)] via-brand-black to-brand-black shadow-[0_0_80px_-20px_rgba(255,130,60,0.5)] z-0 pointer-events-none overflow-hidden">
+        </div>
+
+    </main>
+
+    <!-- About Us Section - AI Vibe Engineer -->
+    <section id="about" class="relative z-10 py-16 md:py-24 bg-brand-black overflow-hidden">
+        <!-- Ambient glow effect -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <div class="absolute top-1/2 right-0 translate-x-1/3 -translate-y-1/2 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-brand-orange/5 blur-[100px] rounded-full"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                
+                <!-- Left: Text Content -->
+                <div class="order-2 lg:order-1">
+                    <span class="text-[#FF823C] text-sm font-medium mb-2 block tracking-wide uppercase">Our Vision</span>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-4 md:mb-6 tracking-tight leading-tight">
+                        Mastering the <span class="text-brand-orange inline-block relative">
+                            AI Vibe
+                            <span class="absolute inset-0 blur-2xl bg-brand-orange/20 -z-10"></span>
+                        </span>
+                    </h2>
+                    <p class="text-base md:text-lg text-zinc-400 mb-4 md:mb-6 leading-relaxed font-light">
+                        The AI Vibe Engineer isn't just a coder—it's a digital artist who paints with algorithms and sculpts with data. We bridge the gap between cold, calculating machines and the warm, intuitive experiences humans crave.
+                    </p>
+                    <p class="text-base md:text-lg text-zinc-400 mb-4 md:mb-6 leading-relaxed font-light">
+                        Our philosophy is simple: technology should feel like a natural extension of human creativity, not a replacement. We craft intelligent systems that understand context, anticipate needs, and respond with nuance.
+                    </p>
+                    <p class="text-base md:text-lg text-zinc-400 leading-relaxed font-light">
+                        Every line of code we write carries intention. Every model we train speaks the language of aesthetics. This is where engineering meets artistry—the sweet spot where AI becomes unforgettable.
+                    </p>
+                </div>
+                
+                <!-- Right: Abstract AI Visual -->
+                <div class="order-1 lg:order-2 relative">
+                    <!-- Background glow -->
+                    <div class="absolute -inset-4 bg-linear-to-br from-brand-orange/10 via-transparent to-transparent blur-2xl"></div>
+                    
+                    <!-- Main visual container -->
+                    <div class="relative bg-[#0F0F0F] border border-brand-border rounded-2xl p-6 md:p-8 h-[300px] sm:h-[350px] md:h-[400px] overflow-hidden">
+                        <!-- Animated grid background -->
+                        <div class="absolute inset-0 opacity-20" style="background-image: linear-gradient(rgba(255,130,60,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,130,60,0.1) 1px, transparent 1px); background-size: 30px 30px;"></div>
+                        
+                        <!-- Central AI Core - Pulsing orb -->
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                            <div class="relative w-32 h-32">
+                                <!-- Outer glow ring -->
+                                <div class="absolute inset-0 rounded-full bg-brand-orange/20 animate-ping"></div>
+                                <div class="absolute inset-2 rounded-full bg-brand-orange/30 animate-pulse"></div>
+                                <div class="absolute inset-4 rounded-full bg-brand-orange/40 shadow-[0_0_30px_rgba(255,130,60,0.5)]"></div>
+                                <!-- Core -->
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <i data-lucide="brain" class="w-12 h-12 text-white"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Neon lines radiating from center -->
+                        <svg class="absolute inset-0 w-full h-full" viewBox="0 0 400 400">
+                            <!-- Line 1 -->
+                            <line x1="200" y1="200" x2="200" y2="80" stroke="#FF823C" stroke-width="1" opacity="0.6" class="animate-pulse">
+                                <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2s" repeatCount="indefinite"/>
+                            </line>
+                            <!-- Line 2 -->
+                            <line x1="200" y1="200" x2="320" y2="120" stroke="#FF823C" stroke-width="1" opacity="0.4" class="animate-pulse">
+                                <animate attributeName="opacity" values="0.4;0.1;0.4" dur="2.5s" repeatCount="indefinite"/>
+                            </line>
+                            <!-- Line 3 -->
+                            <line x1="200" y1="200" x2="340" y2="200" stroke="#FF823C" stroke-width="1" opacity="0.5" class="animate-pulse">
+                                <animate attributeName="opacity" values="0.5;0.15;0.5" dur="1.8s" repeatCount="indefinite"/>
+                            </line>
+                            <!-- Line 4 -->
+                            <line x1="200" y1="200" x2="320" y2="280" stroke="#FF823C" stroke-width="1" opacity="0.3" class="animate-pulse">
+                                <animate attributeName="opacity" values="0.3;0.1;0.3" dur="2.2s" repeatCount="indefinite"/>
+                            </line>
+                            <!-- Line 5 -->
+                            <line x1="200" y1="200" x2="200" y2="320" stroke="#FF823C" stroke-width="1" opacity="0.5" class="animate-pulse">
+                                <animate attributeName="opacity" values="0.5;0.2;0.5" dur="1.9s" repeatCount="indefinite"/>
+                            </line>
+                            <!-- Line 6 -->
+                            <line x1="200" y1="200" x2="80" y2="280" stroke="#FF823C" stroke-width="1" opacity="0.4" class="animate-pulse">
+                                <animate attributeName="opacity" values="0.4;0.15;0.4" dur="2.3s" repeatCount="indefinite"/>
+                            </line>
+                            <!-- Line 7 -->
+                            <line x1="200" y1="200" x2="60" y2="200" stroke="#FF823C" stroke-width="1" opacity="0.6" class="animate-pulse">
+                                <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2.1s" repeatCount="indefinite"/>
+                            </line>
+                            <!-- Line 8 -->
+                            <line x1="200" y1="200" x2="80" y2="120" stroke="#FF823C" stroke-width="1" opacity="0.3" class="animate-pulse">
+                                <animate attributeName="opacity" values="0.3;0.1;0.3" dur="2.4s" repeatCount="indefinite"/>
+                            </line>
+                        </svg>
+                        
+                        <!-- Floating code particles -->
+                        <div class="absolute top-8 left-8 text-xs font-mono text-brand-orange/60">
+                            <span class="animate-pulse">const</span> vibe = true;
+                        </div>
+                        <div class="absolute bottom-8 right-8 text-xs font-mono text-brand-orange/60">
+                            AI.<span class="animate-pulse">dream</span>()
+                        </div>
+                        <div class="absolute top-8 right-16 text-xs font-mono text-brand-orange/40">
+                            &lt;neural /&gt;
+                        </div>
+                        <div class="absolute bottom-12 left-8 text-xs font-mono text-brand-orange/40">
+                            0x4F1E...9A2B
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="relative z-10 border-t border-white/5 bg-brand-black/50 backdrop-blur-sm overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 md:py-12 text-center">
+            <p class="text-sm text-zinc-600 mb-6 md:mb-8 font-medium">Partnering with top industry experts</p>
+            <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12 lg:gap-20 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
+                <!-- Using Text/Icons to simulate logos for accuracy without external images -->
+                <div class="flex items-center gap-2 text-xl font-semibold text-white tracking-tight"><i data-lucide="command" class="w-6 h-6"></i> Coinbase</div>
+                <div class="flex items-center gap-2 text-xl font-semibold text-white tracking-tight"><i data-lucide="music" class="w-6 h-6"></i> Spotify</div>
+                <div class="flex items-center gap-2 text-xl font-semibold text-white tracking-tight"><i data-lucide="slack" class="w-6 h-6"></i> slack</div>
+                <div class="flex items-center gap-2 text-xl font-semibold text-white tracking-tight"><i data-lucide="box" class="w-6 h-6"></i> Dropbox</div>
+                <div class="flex items-center gap-2 text-xl font-semibold text-white tracking-tight"><i data-lucide="codepen" class="w-6 h-6"></i> webflow</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="product" class="relative z-10 py-16 md:py-24 bg-brand-black overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            
+            <div class="text-center mb-12 md:20">
+                <div class="inline-flex items-center justify-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 mb-4 md:mb-6">
+                    <span class="text-xs text-zinc-400">Take Full Control of Your Task</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-4 tracking-tight">
+                    Business <span class="text-brand-orange">Application</span>
+                </h2>
+                <p class="text-zinc-500 max-w-xl mx-auto text-base md:text-lg font-light px-4 sm:px-0">
+                    Our users love how Portfolio simplifies their processes and streamlines operations.
+                </p>
+            </div>
+
+            <!-- Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                
+                <!-- Card 1 -->
+                <div class="group relative p-8 rounded-2xl border border-brand-border bg-brand-dark hover:border-brand-orange/30 transition-all duration-300 hover:shadow-glow/10">
+                    <div class="w-10 h-10 rounded-lg border border-brand-orange/20 bg-brand-orange/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="settings-2" class="w-5 h-5 text-brand-orange"></i>
+                    </div>
+                    <h3 class="text-xl font-medium text-white mb-3 tracking-tight">Customer Insights</h3>
+                    <p class="text-base text-zinc-500 leading-relaxed">
+                        Analyze customer interactions across touchpoints with the platform to gain deeper understanding.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="group relative p-8 rounded-2xl border border-brand-border bg-brand-dark hover:border-brand-orange/30 transition-all duration-300 hover:shadow-glow/10">
+                    <div class="w-10 h-10 rounded-lg border border-brand-orange/20 bg-brand-orange/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="bar-chart-3" class="w-5 h-5 text-brand-orange"></i>
+                    </div>
+                    <h3 class="text-xl font-medium text-white mb-3 tracking-tight">Product Metrics</h3>
+                    <p class="text-base text-zinc-500 leading-relaxed">
+                        Track your products' performance in real-time with comprehensive dashboards.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="group relative p-8 rounded-2xl border border-brand-border bg-brand-dark hover:border-brand-orange/30 transition-all duration-300 hover:shadow-glow/10">
+                    <div class="w-10 h-10 rounded-lg border border-brand-orange/20 bg-brand-orange/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="target" class="w-5 h-5 text-brand-orange"></i>
+                    </div>
+                    <h3 class="text-xl font-medium text-white mb-3 tracking-tight">Campaign Optimization</h3>
+                    <p class="text-base text-zinc-500 leading-relaxed">
+                        Measure campaign success with key metrics like conversion rates and ROI instantly.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Insights Section -->
+    <section class="py-16 md:py-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                
+                <!-- Text Content -->
+                <div>
+                    <span class="text-brand-orange text-sm font-medium mb-2 block">Data Insights</span>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-4 md:mb-6 tracking-tight">
+                        Improved <span class="text-brand-orange">decision-making</span>
+                    </h2>
+                    <p class="text-zinc-500 text-base md:text-lg mb-8 md:mb-10 leading-relaxed font-light">
+                        By leveraging real-time insights and comprehensive data analysis, you can make informed decisions with confidence, reducing uncertainty.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="mt-1 w-5 h-5 rounded border border-brand-orange/50 flex items-center justify-center bg-brand-orange/10 shrink-0">
+                                <i data-lucide="check" class="w-3 h-3 text-brand-orange"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium mb-1">Comprehensive Data Visualization</h4>
+                                <p class="text-sm text-zinc-500">With our advanced visualization tools, turn complex datasets into easy-to-understand charts.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="mt-1 w-5 h-5 rounded border border-brand-orange/50 flex items-center justify-center bg-brand-orange/10 shrink-0">
+                                <i data-lucide="pie-chart" class="w-3 h-3 text-brand-orange"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium mb-1">Predictive Modeling</h4>
+                                <p class="text-sm text-zinc-500">Leverage cutting-edge predictive analytics to forecast future trends and outcomes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UI Mockup -->
+                <div class="relative">
+                    <!-- Background Glow for Card -->
+                    <div class="absolute -inset-1 bg-linear-to-r from-brand-orange/20 to-transparent blur-2xl opacity-30"></div>
+                    
+                    <div class="relative bg-[#0F0F0F] border border-brand-border rounded-xl p-8 shadow-2xl">
+                        <div class="flex justify-between items-start mb-12">
+                            <div>
+                                <h3 class="text-zinc-400 text-sm font-medium">Improved decision making</h3>
+                                <div class="flex items-baseline gap-2 mt-1">
+                                    <span class="text-4xl font-semibold text-white tracking-tight">85%</span>
+                                    <span class="text-xs font-medium text-green-500 bg-green-500/10 px-1.5 py-0.5 rounded flex items-center">
+                                        <i data-lucide="arrow-up" class="w-3 h-3 mr-0.5"></i> 12%
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-2 rounded-lg bg-zinc-900 border border-brand-border">
+                                <i data-lucide="more-horizontal" class="w-5 h-5 text-zinc-500"></i>
+                            </div>
+                        </div>
+
+                        <!-- Bar Chart Representation -->
+                        <div class="h-48 flex items-end justify-between gap-4 px-2">
+                            <!-- Bar 1 (Orange, Hero) -->
+                            <div class="w-full bg-linear-to-t from-brand-orange to-[#ff8c38] rounded-t-sm relative group h-[85%]">
+                                <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-zinc-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity border border-white/10">85%</div>
+                            </div>
+                            <!-- Bar 2 (Muted) -->
+                            <div class="w-full bg-[#1a1a1a] border-t border-white/5 rounded-t-sm h-[45%] relative overflow-hidden">
+                                <div class="absolute inset-0 opacity-20" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, #fff 2px, #fff 4px);"></div>
+                            </div>
+                            <!-- Bar 3 (Muted) -->
+                            <div class="w-full bg-[#1a1a1a] border-t border-white/5 rounded-t-sm h-[30%] relative overflow-hidden">
+                                <div class="absolute inset-0 opacity-20" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, #fff 2px, #fff 4px);"></div>
+                            </div>
+                             <!-- Bar 4 (Muted) -->
+                             <div class="w-full bg-[#1a1a1a] border-t border-white/5 rounded-t-sm h-[60%] relative overflow-hidden">
+                                <div class="absolute inset-0 opacity-20" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, #fff 2px, #fff 4px);"></div>
+                            </div>
+                        </div>
+
+                        <!-- Chart Labels -->
+                        <div class="flex justify-between mt-4 px-2">
+                            <span class="text-[10px] uppercase tracking-wider text-white font-medium">Visual</span>
+                            <span class="text-[10px] uppercase tracking-wider text-zinc-600">Model</span>
+                            <span class="text-[10px] uppercase tracking-wider text-zinc-600">Insight</span>
+                            <span class="text-[10px] uppercase tracking-wider text-zinc-600">Growth</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Section (AI Products) -->
+    <section id="solutions" class="py-16 md:py-24 relative overflow-hidden">
+        <!-- Soft glow behind cards -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[600px] h-[250px] md:h-[400px] bg-brand-orange/5 blur-[100px] rounded-full"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <!-- Title -->
+            <div class="text-center mb-10 md:mb-16">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-semibold text-white tracking-tight">
+                    Powered <span class="text-brand-orange">Solutions</span>
+                </h2>
+            </div>
+            
+            <!-- Cards Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                
+                <!-- Card 1: AI Core Integration -->
+                <div class="group relative p-8 rounded-2xl border border-brand-border bg-brand-dark hover:border-brand-orange/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-glow/20">
+                    <div class="w-12 h-12 rounded-xl border border-brand-orange/30 bg-brand-orange/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="cpu" class="w-6 h-6 text-brand-orange"></i>
+                    </div>
+                    <h3 class="text-xl font-medium text-white mb-3 tracking-tight">AI Core Integration</h3>
+                    <p class="text-base text-zinc-500 leading-relaxed">
+                        Seamlessly integrate advanced AI capabilities into your existing infrastructure with our plug-and-play core module.
+                    </p>
+                </div>
+
+                <!-- Card 2: Real-time Data Analytics -->
+                <div class="group relative p-8 rounded-2xl border border-brand-border bg-brand-dark hover:border-brand-orange/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-glow/20">
+                    <div class="w-12 h-12 rounded-xl border border-brand-orange/30 bg-brand-orange/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="activity" class="w-6 h-6 text-brand-orange"></i>
+                    </div>
+                    <h3 class="text-xl font-medium text-white mb-3 tracking-tight">Real-time Data Analytics</h3>
+                    <p class="text-base text-zinc-500 leading-relaxed mb-6">
+                        Monitor your data streams in real-time with advanced visualization and instant actionable insights.
+                    </p>
+                    <!-- Progress bar visualization -->
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="text-zinc-400">Processing Speed</span>
+                            <span class="text-brand-orange font-medium">92%</span>
+                        </div>
+                        <div class="h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                            <div class="h-full w-[92%] bg-linear-to-r from-brand-orange to-orange-400 rounded-full"></div>
+                        </div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="text-zinc-400">Data Points</span>
+                            <span class="text-brand-orange font-medium">1.2M</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Automated Vibe Control -->
+                <div class="group relative p-8 rounded-2xl border border-brand-border bg-brand-dark hover:border-brand-orange/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-glow/20">
+                    <div class="w-12 h-12 rounded-xl border border-brand-orange/30 bg-brand-orange/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="bot" class="w-6 h-6 text-brand-orange"></i>
+                    </div>
+                    <h3 class="text-xl font-medium text-white mb-3 tracking-tight">Automated Vibe Control</h3>
+                    <p class="text-base text-zinc-500 leading-relaxed">
+                        Let AI agents handle context-aware automation for your workflow with intelligent ambient control.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack & Ecosystem Section -->
+    <section id="tech-stack" class="relative z-10 py-16 md:py-24 bg-brand-black overflow-hidden">
+        <!-- Ambient glow effect -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[600px] h-[250px] md:h-[400px] bg-brand-orange/5 blur-[100px] rounded-full"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <!-- Section Header -->
+            <div class="text-center mb-10 md:mb-16">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-2 md:mb-3 tracking-tight">
+                    Technical Ecosystem
+                </h2>
+                <p class="text-brand-orange text-base md:text-lg font-light">
+                    Advanced AI & Dev Tools
+                </p>
+            </div>
+            
+            <!-- Tech Stack Grid - Responsive auto-fit -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-3 sm:gap-4" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));">
+                
+                <!-- OpenAI - Inline SVG for reliability -->
+                <div class="group flex flex-col items-center justify-center p-4 sm:p-6 rounded-2xl bg-[#111111] border border-zinc-800 transition-all duration-500 ease-in-out hover:scale-105 hover:border-orange-500/40 hover:shadow-[0_0_30px_rgba(249,115,22,0.15)]">
+                    <div class="w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 bg-zinc-900/50 border border-zinc-800 rounded-xl sm:rounded-2xl flex items-center justify-center">
+                        <svg class="w-12 h-12 text-white" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073Z"/>
+                            <path d="M13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494Z"/>
+                            <path d="M13.26 17.306v2.268a.776.776 0 0 1-.405.677l-4.522 2.611a.771.771 0 0 1-.785-.012l.142-.14 4.783-2.758a.771.771 0 0 1 .78-.038l.067.041Z"/>
+                            <path d="M10.872 9.52l4.526-2.614a.771.771 0 0 1 .785.012l.14.14-.14.142-4.779 2.758a.776.776 0 0 1-.405.681l.009 4.496-2.223-1.269a.077.077 0 0 1-.028-.054v-.072l.013-.053 2.044-1.178v-2.25l-.013-.057Z"/>
+                        </svg>
+                    </div>
+                    <span class="text-white font-semibold mt-4">OpenAI</span>
+                    <span class="text-zinc-500 text-sm">GPT-4</span>
+                </div>
+
+                <!-- Anthropic -->
+                <div class="group flex flex-col items-center justify-center p-4 sm:p-6 rounded-2xl bg-[#111111] border border-zinc-800 transition-all duration-500 ease-in-out hover:scale-105 hover:border-orange-500/40 hover:shadow-[0_0_30px_rgba(249,115,22,0.15)]">
+                    <div class="w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 bg-zinc-900/50 border border-zinc-800 rounded-xl sm:rounded-2xl flex items-center justify-center">
+                        <img src="https://cdn.simpleicons.org/anthropic/white" alt="Anthropic" class="w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12">
+                    </div>
+                    <span class="text-white font-semibold mt-3 sm:mt-4 text-sm sm:text-base">Anthropic</span>
+                    <span class="text-zinc-500 text-xs sm:text-sm">Claude</span>
+                </div>
+
+                <!-- LangChain -->
+                <div class="group flex flex-col items-center justify-center p-4 sm:p-6 rounded-2xl bg-[#111111] border border-zinc-800 transition-all duration-500 ease-in-out hover:scale-105 hover:border-orange-500/40 hover:shadow-[0_0_30px_rgba(249,115,22,0.15)]">
+                    <div class="w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 bg-zinc-900/50 border border-zinc-800 rounded-xl sm:rounded-2xl flex items-center justify-center">
+                        <img src="https://cdn.simpleicons.org/langchain/white" alt="LangChain" class="w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12">
+                    </div>
+                    <span class="text-white font-semibold mt-3 sm:mt-4 text-sm sm:text-base">LangChain</span>
+                    <span class="text-zinc-500 text-xs sm:text-sm">AI Framework</span>
+                </div>
+
+                <!-- PyTorch -->
+                <div class="group flex flex-col items-center justify-center p-4 sm:p-6 rounded-2xl bg-[#111111] border border-zinc-800 transition-all duration-500 ease-in-out hover:scale-105 hover:border-orange-500/40 hover:shadow-[0_0_30px_rgba(249,115,22,0.15)]">
+                    <div class="w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 bg-zinc-900/50 border border-zinc-800 rounded-xl sm:rounded-2xl flex items-center justify-center">
+                        <img src="https://cdn.simpleicons.org/pytorch/white" alt="PyTorch" class="w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12">
+                    </div>
+                    <span class="text-white font-semibold mt-3 sm:mt-4 text-sm sm:text-base">PyTorch</span>
+                    <span class="text-zinc-500 text-xs sm:text-sm">ML Library</span>
+                </div>
+
+                <!-- Next.js -->
+                <div class="group flex flex-col items-center justify-center p-4 sm:p-6 rounded-2xl bg-[#111111] border border-zinc-800 transition-all duration-500 ease-in-out hover:scale-105 hover:border-orange-500/40 hover:shadow-[0_0_30px_rgba(249,115,22,0.15)]">
+                    <div class="w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 bg-zinc-900/50 border border-zinc-800 rounded-xl sm:rounded-2xl flex items-center justify-center">
+                        <img src="https://cdn.simpleicons.org/nextdotjs/white" alt="Next.js" class="w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12">
+                    </div>
+                    <span class="text-white font-semibold mt-3 sm:mt-4 text-sm sm:text-base">Next.js</span>
+                    <span class="text-zinc-500 text-xs sm:text-sm">React Framework</span>
+                </div>
+
+                <!-- React -->
+                <div class="group flex flex-col items-center justify-center p-4 sm:p-6 rounded-2xl bg-[#111111] border border-zinc-800 transition-all duration-500 ease-in-out hover:scale-105 hover:border-orange-500/40 hover:shadow-[0_0_30px_rgba(249,115,22,0.15)]">
+                    <div class="w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 bg-zinc-900/50 border border-zinc-800 rounded-xl sm:rounded-2xl flex items-center justify-center">
+                        <img src="https://cdn.simpleicons.org/react/white" alt="React" class="w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12">
+                    </div>
+                    <span class="text-white font-semibold mt-3 sm:mt-4 text-sm sm:text-base">React</span>
+                    <span class="text-zinc-500 text-xs sm:text-sm">UI Library</span>
+                </div>
+
+                <!-- Tailwind CSS -->
+                <div class="group flex flex-col items-center justify-center p-4 sm:p-6 rounded-2xl bg-[#111111] border border-zinc-800 transition-all duration-500 ease-in-out hover:scale-105 hover:border-orange-500/40 hover:shadow-[0_0_30px_rgba(249,115,22,0.15)]">
+                    <div class="w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 bg-zinc-900/50 border border-zinc-800 rounded-xl sm:rounded-2xl flex items-center justify-center">
+                        <img src="https://cdn.simpleicons.org/tailwindcss/white" alt="Tailwind CSS" class="w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12">
+                    </div>
+                    <span class="text-white font-semibold mt-3 sm:mt-4 text-sm sm:text-base">Tailwind CSS</span>
+                    <span class="text-zinc-500 text-xs sm:text-sm">Styling</span>
+                </div>
+
+                <!-- TypeScript -->
+                <div class="group flex flex-col items-center justify-center p-4 sm:p-6 rounded-2xl bg-[#111111] border border-zinc-800 transition-all duration-500 ease-in-out hover:scale-105 hover:border-orange-500/40 hover:shadow-[0_0_30px_rgba(249,115,22,0.15)]">
+                    <div class="w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 bg-zinc-900/50 border border-zinc-800 rounded-xl sm:rounded-2xl flex items-center justify-center">
+                        <img src="https://cdn.simpleicons.org/typescript/white" alt="TypeScript" class="w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12">
+                    </div>
+                    <span class="text-white font-semibold mt-3 sm:mt-4 text-sm sm:text-base">TypeScript</span>
+                    <span class="text-zinc-500 text-xs sm:text-sm">Language</span>
+                </div>
+
+                <!-- Supabase -->
+                <div class="group flex flex-col items-center justify-center p-4 sm:p-6 rounded-2xl bg-[#111111] border border-zinc-800 transition-all duration-500 ease-in-out hover:scale-105 hover:border-orange-500/40 hover:shadow-[0_0_30px_rgba(249,115,22,0.15)]">
+                    <div class="w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 bg-zinc-900/50 border border-zinc-800 rounded-xl sm:rounded-2xl flex items-center justify-center">
+                        <img src="https://cdn.simpleicons.org/supabase/white" alt="Supabase" class="w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12">
+                    </div>
+                    <span class="text-white font-semibold mt-3 sm:mt-4 text-sm sm:text-base">Supabase</span>
+                    <span class="text-zinc-500 text-xs sm:text-sm">Backend</span>
+                </div>
+
+                <!-- Docker -->
+                <div class="group flex flex-col items-center justify-center p-4 sm:p-6 rounded-2xl bg-[#111111] border border-zinc-800 transition-all duration-500 ease-in-out hover:scale-105 hover:border-orange-500/40 hover:shadow-[0_0_30px_rgba(249,115,22,0.15)]">
+                    <div class="w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 bg-zinc-900/50 border border-zinc-800 rounded-xl sm:rounded-2xl flex items-center justify-center">
+                        <img src="https://cdn.simpleicons.org/docker/white" alt="Docker" class="w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12">
+                    </div>
+                    <span class="text-white font-semibold mt-3 sm:mt-4 text-sm sm:text-base">Docker</span>
+                    <span class="text-zinc-500 text-xs sm:text-sm">Containerization</span>
+                </div>
+
+                <!-- GitHub -->
+                <div class="group flex flex-col items-center justify-center p-4 sm:p-6 rounded-2xl bg-[#111111] border border-zinc-800 transition-all duration-500 ease-in-out hover:scale-105 hover:border-orange-500/40 hover:shadow-[0_0_30px_rgba(249,115,22,0.15)]">
+                    <div class="w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 bg-zinc-900/50 border border-zinc-800 rounded-xl sm:rounded-2xl flex items-center justify-center">
+                        <img src="https://cdn.simpleicons.org/github/white" alt="GitHub" class="w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12">
+                    </div>
+                    <span class="text-white font-semibold mt-3 sm:mt-4 text-sm sm:text-base">GitHub</span>
+                    <span class="text-zinc-500 text-xs sm:text-sm">CI/CD</span>
+                </div>
+
+                <!-- Vercel -->
+                <div class="group flex flex-col items-center justify-center p-4 sm:p-6 rounded-2xl bg-[#111111] border border-zinc-800 transition-all duration-500 ease-in-out hover:scale-105 hover:border-orange-500/40 hover:shadow-[0_0_30px_rgba(249,115,22,0.15)]">
+                    <div class="w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 bg-zinc-900/50 border border-zinc-800 rounded-xl sm:rounded-2xl flex items-center justify-center">
+                        <img src="https://cdn.simpleicons.org/vercel/white" alt="Vercel" class="w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12">
+                    </div>
+                    <span class="text-white font-semibold mt-3 sm:mt-4 text-sm sm:text-base">Vercel</span>
+                    <span class="text-zinc-500 text-xs sm:text-sm">Deployment</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Engineering Workflow Section -->
+    <section class="relative z-10 py-16 md:py-24 bg-brand-black overflow-hidden" id="process">
+        <!-- Ambient glow effect -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[800px] h-[250px] md:h-[500px] bg-brand-orange/5 blur-[100px] rounded-full"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <!-- Section Header -->
+            <div class="text-center mb-10 md:mb-16">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-2 md:mb-3 tracking-tight">
+                    Engineering <span class="text-[#FF823C]">Workflow</span>
+                </h2>
+                <p class="text-zinc-500 text-base md:text-lg font-light">
+                    Four steps to transform your vision into reality
+                </p>
+            </div>
+            
+            <!-- Process Steps Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-6 relative">
+                
+                <!-- Connecting Line (Desktop Only) -->
+                <div class="hidden md:block absolute top-1/2 left-[12.5%] right-[12.5%] h-px -translate-y-1/2 z-0">
+                    <div class="h-full w-full border-t-2 border-dashed border-[#FF823C]/30"></div>
+                </div>
+                
+                <!-- Step 1: Discovery -->
+                <div class="process-card relative z-10 group" style="transition-delay: 0ms;">
+                    <!-- Large transparent number -->
+                    <div class="absolute -top-2 sm:-top-4 -left-1 sm:-left-2 text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-[#FF823C] process-number opacity-20 select-none">01</div>
+                    
+                    <!-- Card -->
+                    <div class="relative bg-[#121212] border border-brand-border rounded-lg p-6 h-full transition-all duration-300 hover:border-[#FF823C]/50">
+                        <!-- Icon -->
+                        <div class="w-12 h-12 rounded-lg border border-[#FF823C]/20 bg-[#FF823C]/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="search" class="w-6 h-6 text-[#FF823C]"></i>
+                        </div>
+                        
+                        <!-- Content -->
+                        <h3 class="text-xl font-medium text-white mb-2 tracking-tight">Discovery</h3>
+                        <p class="text-sm text-zinc-500 leading-relaxed">
+                            Define AI strategy and analyze requirements to build the right foundation.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Step 2: Architecture -->
+                <div class="process-card relative z-10 group" style="transition-delay: 150ms;">
+                    <!-- Large transparent number -->
+                    <div class="absolute -top-2 sm:-top-4 -left-1 sm:-left-2 text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-[#FF823C] process-number opacity-20 select-none">02</div>
+                    
+                    <!-- Card -->
+                    <div class="relative bg-[#121212] border border-brand-border rounded-lg p-6 h-full transition-all duration-300 hover:border-[#FF823C]/50">
+                        <!-- Icon -->
+                        <div class="w-12 h-12 rounded-lg border border-[#FF823C]/20 bg-[#FF823C]/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="layout" class="w-6 h-6 text-[#FF823C]"></i>
+                        </div>
+                        
+                        <!-- Content -->
+                        <h3 class="text-xl font-medium text-white mb-2 tracking-tight">Architecture</h3>
+                        <p class="text-sm text-zinc-500 leading-relaxed">
+                            Plan the system structure and integration of AI models for optimal performance.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Step 3: Engineering -->
+                <div class="process-card relative z-10 group" style="transition-delay: 300ms;">
+                    <!-- Large transparent number -->
+                    <div class="absolute -top-2 sm:-top-4 -left-1 sm:-left-2 text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-[#FF823C] process-number opacity-20 select-none">03</div>
+                    
+                    <!-- Card -->
+                    <div class="relative bg-[#121212] border border-brand-border rounded-lg p-6 h-full transition-all duration-300 hover:border-[#FF823C]/50">
+                        <!-- Icon -->
+                        <div class="w-12 h-12 rounded-lg border border-[#FF823C]/20 bg-[#FF823C]/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="code" class="w-6 h-6 text-[#FF823C]"></i>
+                        </div>
+                        
+                        <!-- Content -->
+                        <h3 class="text-xl font-medium text-white mb-2 tracking-tight">Engineering</h3>
+                        <p class="text-sm text-zinc-500 leading-relaxed">
+                            Clean code, high speed and perfect UI/UX for exceptional experiences.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Step 4: Optimization -->
+                <div class="process-card relative z-10 group" style="transition-delay: 450ms;">
+                    <!-- Large transparent number -->
+                    <div class="absolute -top-2 sm:-top-4 -left-1 sm:-left-2 text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-[#FF823C] process-number opacity-20 select-none">04</div>
+                    
+                    <!-- Card -->
+                    <div class="relative bg-[#121212] border border-brand-border rounded-lg p-6 h-full transition-all duration-300 hover:border-[#FF823C]/50">
+                        <!-- Icon -->
+                        <div class="w-12 h-12 rounded-lg border border-[#FF823C]/20 bg-[#FF823C]/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="settings-2" class="w-6 h-6 text-[#FF823C]"></i>
+                        </div>
+                        
+                        <!-- Content -->
+                        <h3 class="text-xl font-medium text-white mb-2 tracking-tight">Optimization</h3>
+                        <p class="text-sm text-zinc-500 leading-relaxed">
+                            Adapt AI instructions and settings to real life for continuous improvement.
+                        </p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Feedback Section -->
+    <section id="feedback" class="relative z-10 py-16 md:py-24 bg-brand-black overflow-hidden">
+        <!-- Ambient glow effect -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[800px] h-[250px] md:h-[500px] bg-brand-orange/5 blur-[120px] rounded-full"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <!-- Section Header -->
+            <div class="text-center mb-10 md:mb-16">
+                <span class="text-brand-orange text-sm font-medium mb-2 block">Testimonials</span>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-4 tracking-tight">
+                    What Our <span class="text-brand-orange">Clients Say</span>
+                </h2>
+                <p class="text-zinc-500 max-w-xl mx-auto text-base md:text-lg font-light px-4 sm:px-0">
+                    Trusted by industry leaders worldwide
+                </p>
+            </div>
+            
+            <!-- Feedback Cards Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+                
+                <!-- Card 1: Michael Miller -->
+                <div class="group relative rounded-2xl overflow-hidden border border-white/10 bg-[#121212] hover:border-white/20 transition-all duration-300 hover:shadow-[0_0_30px_-5px_rgba(255,130,60,0.15)]">
+                    <!-- Quote Icon -->
+                    <div class="absolute top-4 left-4">
+                        <i data-lucide="quote" class="w-8 h-8 text-brand-orange/30"></i>
+                    </div>
+                    <!-- Content -->
+                    <div class="p-6 pt-16 h-full flex flex-col justify-between">
+                        <p class="text-white text-base leading-relaxed italic mb-8">Portfolio has completely revolutionized how we approach data analytics. The real-time insights have helped us make decisions 10x faster, and the ROI has exceeded all expectations. This is exactly what modern businesses need.</p>
+                        <div class="border-t border-white/10 pt-4 mt-auto">
+                            <h4 class="text-[#FF823C] font-medium text-base">Michael Miller</h4>
+                            <p class="text-zinc-500 text-sm">CEO</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Christopher Davis -->
+                <div class="group relative rounded-2xl overflow-hidden border border-white/10 bg-[#121212] hover:border-white/20 transition-all duration-300 hover:shadow-[0_0_30px_-5px_rgba(255,130,60,0.15)]">
+                    <!-- Quote Icon -->
+                    <div class="absolute top-4 left-4">
+                        <i data-lucide="quote" class="w-8 h-8 text-brand-orange/30"></i>
+                    </div>
+                    <!-- Content -->
+                    <div class="p-6 pt-16 h-full flex flex-col justify-between">
+                        <p class="text-white text-base leading-relaxed italic mb-8">The integration process was surprisingly smooth. Our team was up and running within days, not months. The API documentation is pristine and the support team actually responds. Finally, a tool that delivers on its promises.</p>
+                        <div class="border-t border-white/10 pt-4 mt-auto">
+                            <h4 class="text-[#FF823C] font-medium text-base">Christopher Davis</h4>
+                            <p class="text-zinc-500 text-sm">CTO</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Matthew Wilson -->
+                <div class="group relative rounded-2xl overflow-hidden border border-white/10 bg-[#121212] hover:border-white/20 transition-all duration-300 hover:shadow-[0_0_30px_-5px_rgba(255,130,60,0.15)]">
+                    <!-- Quote Icon -->
+                    <div class="absolute top-4 left-4">
+                        <i data-lucide="quote" class="w-8 h-8 text-brand-orange/30"></i>
+                    </div>
+                    <!-- Content -->
+                    <div class="p-6 pt-16 h-full flex flex-col justify-between">
+                        <p class="text-white text-base leading-relaxed italic mb-8">We've tried countless analytics platforms, but nothing compares to Portfolio's intuitive interface. The predictive modeling features gave us insights we never thought possible, and the visual dashboards make reporting a breeze.</p>
+                        <div class="border-t border-white/10 pt-4 mt-auto">
+                            <h4 class="text-[#FF823C] font-medium text-base">Matthew Wilson</h4>
+                            <p class="text-zinc-500 text-sm">Product Manager</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Joshua Taylor -->
+                <div class="group relative rounded-2xl overflow-hidden border border-white/10 bg-[#121212] hover:border-white/20 transition-all duration-300 hover:shadow-[0_0_30px_-5px_rgba(255,130,60,0.15)]">
+                    <!-- Quote Icon -->
+                    <div class="absolute top-4 left-4">
+                        <i data-lucide="quote" class="w-8 h-8 text-brand-orange/30"></i>
+                    </div>
+                    <!-- Content -->
+                    <div class="p-6 pt-16 h-full flex flex-col justify-between">
+                        <p class="text-white text-base leading-relaxed italic mb-8">As a developer, I appreciate the clean API and comprehensive documentation. The SDKs work seamlessly across our entire tech stack. Portfolio didn't just meet our needs—they anticipated them.</p>
+                        <div class="border-t border-white/10 pt-4 mt-auto">
+                            <h4 class="text-[#FF823C] font-medium text-base">Joshua Taylor</h4>
+                            <p class="text-zinc-500 text-sm">Developer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5: Andrew Anderson -->
+                <div class="group relative rounded-2xl overflow-hidden border border-white/10 bg-[#121212] hover:border-white/20 transition-all duration-300 hover:shadow-[0_0_30px_-5px_rgba(255,130,60,0.15)]">
+                    <!-- Quote Icon -->
+                    <div class="absolute top-4 left-4">
+                        <i data-lucide="quote" class="w-8 h-8 text-brand-orange/30"></i>
+                    </div>
+                    <!-- Content -->
+                    <div class="p-6 pt-16 h-full flex flex-col justify-between">
+                        <p class="text-white text-base leading-relaxed italic mb-8">The attention to detail in this platform is remarkable. Every interaction feels polished, every visualization beautiful. It's rare to find software that's both powerful and aesthetically pleasing.</p>
+                        <div class="border-t border-white/10 pt-4 mt-auto">
+                            <h4 class="text-[#FF823C] font-medium text-base">Andrew Anderson</h4>
+                            <p class="text-zinc-500 text-sm">Designer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6: Ryan Thompson -->
+                <div class="group relative rounded-2xl overflow-hidden border border-white/10 bg-[#121212] hover:border-white/20 transition-all duration-300 hover:shadow-[0_0_30px_-5px_rgba(255,130,60,0.15)]">
+                    <!-- Quote Icon -->
+                    <div class="absolute top-4 left-4">
+                        <i data-lucide="quote" class="w-8 h-8 text-brand-orange/30"></i>
+                    </div>
+                    <!-- Content -->
+                    <div class="p-6 pt-16 h-full flex flex-col justify-between">
+                        <p class="text-white text-base leading-relaxed italic mb-8">This platform gave us the competitive edge we needed. The automated workflows saved us hundreds of manual hours, and the insights helped us identify opportunities we would have otherwise missed. Essential for any startup.</p>
+                        <div class="border-t border-white/10 pt-4 mt-auto">
+                            <h4 class="text-[#FF823C] font-medium text-base">Ryan Thompson</h4>
+                            <p class="text-zinc-500 text-sm">Founder</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 7: Daniel Garcia -->
+                <div class="group relative rounded-2xl overflow-hidden border border-white/10 bg-[#121212] hover:border-white/20 transition-all duration-300 hover:shadow-[0_0_30px_-5px_rgba(255,130,60,0.15)]">
+                    <!-- Quote Icon -->
+                    <div class="absolute top-4 left-4">
+                        <i data-lucide="quote" class="w-8 h-8 text-brand-orange/30"></i>
+                    </div>
+                    <!-- Content -->
+                    <div class="p-6 pt-16 h-full flex flex-col justify-between">
+                        <p class="text-white text-base leading-relaxed italic mb-8">Data has never been clearer or more accessible. The customizable dashboards let me create exactly the views my stakeholders need, and the export options make presentations effortless. My productivity has doubled.</p>
+                        <div class="border-t border-white/10 pt-4 mt-auto">
+                            <h4 class="text-[#FF823C] font-medium text-base">Daniel Garcia</h4>
+                            <p class="text-zinc-500 text-sm">Analyst</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 8: Nicholas White -->
+                <div class="group relative rounded-2xl overflow-hidden border border-white/10 bg-[#121212] hover:border-white/20 transition-all duration-300 hover:shadow-[0_0_30px_-5px_rgba(255,130,60,0.15)]">
+                    <!-- Quote Icon -->
+                    <div class="absolute top-4 left-4">
+                        <i data-lucide="quote" class="w-8 h-8 text-brand-orange/30"></i>
+                    </div>
+                    <!-- Content -->
+                    <div class="p-6 pt-16 h-full flex flex-col justify-between">
+                        <p class="text-white text-base leading-relaxed italic mb-8">Our team adoption was immediate—everyone from analysts to executives uses Portfolio daily. The learning curve is virtually nonexistent, and the results speak for themselves. This has become our single source of truth.</p>
+                        <div class="border-t border-white/10 pt-4 mt-auto">
+                            <h4 class="text-[#FF823C] font-medium text-base">Nicholas White</h4>
+                            <p class="text-zinc-500 text-sm">Manager</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="relative z-10 py-16 md:py-24 bg-brand-black overflow-hidden">
+        <!-- Ambient glow effect -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[800px] h-[250px] md:h-[500px] bg-brand-orange/5 blur-[120px] rounded-full"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <!-- Section Header -->
+            <div class="text-center mb-10 md:mb-16">
+                <span class="text-brand-orange text-sm font-medium mb-2 block">Get in Touch</span>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-4 tracking-tight">
+                    Let's <span class="text-brand-orange">Connect</span>
+                </h2>
+            </div>
+            
+            <!-- Split Layout: 50/50 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
+                
+                <!-- Left Side: Contact Info -->
+                <div class="flex flex-col justify-center">
+                    <h3 class="text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-4 md:mb-6 tracking-tight">
+                        Let's build the <span class="text-brand-orange">future</span> together
+                    </h3>
+                    <p class="text-zinc-400 text-base md:text-lg mb-6 md:mb-8 leading-relaxed font-light">
+                        Have a project in mind? Let's discuss how we can transform your vision into reality with AI-powered solutions.
+                    </p>
+                    
+                    <!-- Contact Links -->
+                    <div class="space-y-4">
+                        <!-- Email -->
+                        <a href="mailto:hello@aivibeengineer.com" class="flex items-center gap-4 text-zinc-400 hover:text-white transition-colors group">
+                            <div class="w-10 h-10 rounded-lg border border-brand-border bg-brand-dark flex items-center justify-center group-hover:border-brand-orange/30 transition-colors">
+                                <i data-lucide="mail" class="w-5 h-5 text-brand-orange"></i>
+                            </div>
+                            <span class="text-base">hello@aivibeengineer.com</span>
+                        </a>
+                        
+                        <!-- LinkedIn -->
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 text-zinc-400 hover:text-white transition-colors group">
+                            <div class="w-10 h-10 rounded-lg border border-brand-border bg-brand-dark flex items-center justify-center group-hover:border-brand-orange/30 transition-colors">
+                                <i data-lucide="linkedin" class="w-5 h-5 text-brand-orange"></i>
+                            </div>
+                            <span class="text-base">LinkedIn</span>
+                        </a>
+                        
+                        <!-- GitHub -->
+                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 text-zinc-400 hover:text-white transition-colors group">
+                            <div class="w-10 h-10 rounded-lg border border-brand-border bg-brand-dark flex items-center justify-center group-hover:border-brand-orange/30 transition-colors">
+                                <i data-lucide="github" class="w-5 h-5 text-brand-orange"></i>
+                            </div>
+                            <span class="text-base">GitHub</span>
+                        </a>
+                        
+                        <!-- X (Twitter) -->
+                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 text-zinc-400 hover:text-white transition-colors group">
+                            <div class="w-10 h-10 rounded-lg border border-brand-border bg-brand-dark flex items-center justify-center group-hover:border-brand-orange/30 transition-colors">
+                                <i data-lucide="twitter" class="w-5 h-5 text-brand-orange"></i>
+                            </div>
+                            <span class="text-base">X</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Right Side: Interactive Form -->
+                <div class="relative">
+                    <!-- Background Glow -->
+                    <div class="absolute -inset-4 bg-linear-to-br from-brand-orange/10 via-transparent to-transparent blur-2xl opacity-50"></div>
+                    
+                    <!-- Form Container -->
+                    <div class="relative bg-[#0F0F0F] border border-brand-border rounded-2xl p-6 md:p-8">
+                        <form id="contactForm" class="space-y-6" novalidate>
+                            <!-- Full Name -->
+                            <div class="relative">
+                                <label for="fullName" class="block text-sm font-medium text-zinc-400 mb-2">Full Name</label>
+                                <input 
+                                    type="text" 
+                                    id="fullName" 
+                                    name="fullName" 
+                                    placeholder="John Doe"
+                                    class="w-full bg-[#1a1a1a] border border-white/10 rounded-lg px-4 py-3 text-white placeholder-zinc-600 focus:outline-none focus:border-[#FF823C] focus:shadow-[0_0_15px_rgba(255,130,60,0.3)] transition-all duration-300"
+                                >
+                                <p class="error-message hidden mt-2 text-sm text-red-400 items-center gap-1">
+                                    <i data-lucide="alert-circle" class="w-4 h-4"></i>
+                                    <span>Please enter your full name</span>
+                                </p>
+                            </div>
+                            
+                            <!-- Email Address -->
+                            <div class="relative">
+                                <label for="email" class="block text-sm font-medium text-zinc-400 mb-2">Email Address</label>
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    name="email" 
+                                    placeholder="john@example.com"
+                                    class="w-full bg-[#1a1a1a] border border-white/10 rounded-lg px-4 py-3 text-white placeholder-zinc-600 focus:outline-none focus:border-[#FF823C] focus:shadow-[0_0_15px_rgba(255,130,60,0.3)] transition-all duration-300"
+                                >
+                                <p class="error-message hidden mt-2 text-sm text-red-400 items-center gap-1">
+                                    <i data-lucide="alert-circle" class="w-4 h-4"></i>
+                                    <span>Please enter a valid email address</span>
+                                </p>
+                            </div>
+                            
+                            <!-- Message -->
+                            <div class="relative">
+                                <label for="message" class="block text-sm font-medium text-zinc-400 mb-2">Message</label>
+                                <textarea 
+                                    id="message" 
+                                    name="message" 
+                                    rows="5"
+                                    placeholder="Tell us about your project..."
+                                    class="w-full bg-[#1a1a1a] border border-white/10 rounded-lg px-4 py-3 text-white placeholder-zinc-600 focus:outline-none focus:border-[#FF823C] focus:shadow-[0_0_15px_rgba(255,130,60,0.3)] transition-all duration-300 resize-none"
+                                ></textarea>
+                                <p class="error-message hidden mt-2 text-sm text-red-400 items-center gap-1">
+                                    <i data-lucide="alert-circle" class="w-4 h-4"></i>
+                                    <span>Please enter your message</span>
+                                </p>
+                            </div>
+                            
+                            <!-- Submit Button -->
+                            <button 
+                                type="submit" 
+                                class="w-full bg-brand-orange hover:bg-[#e65f00] text-white font-medium py-4 px-8 rounded-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(255,130,60,0.4)] active:scale-[0.98] flex items-center justify-center gap-2"
+                            >
+                                <span>Send Message</span>
+                                <i data-lucide="send" class="w-4 h-4"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative z-10 bg-linear-to-b from-brand-black to-[#121212] border-t border-white/5 overflow-hidden">
+        
+        <!-- Main Footer -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-20">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+                
+                <!-- Left: Brand & Slogan -->
+                <div class="flex flex-col gap-4">
+                    <div class="flex items-center gap-2 group cursor-pointer">
+                        <div class="w-8 h-8 rounded-lg bg-linear-to-br from-brand-orange to-orange-700 flex items-center justify-center text-white shadow-glow">
+                            <i data-lucide="layers" class="w-5 h-5"></i>
+                        </div>
+                        <span class="text-white font-medium text-lg tracking-tight group-hover:text-white/90 transition-colors">Portfolio</span>
+                    </div>
+                    <p class="text-zinc-500 text-sm leading-relaxed max-w-xs">
+                        <span class="text-white font-medium">AI Vibe Engineer</span><br class="hidden sm:inline">
+                        Engineering the future of AI interfaces
+                    </p>
+                </div>
+                
+                <!-- Center: Navigation -->
+                <div class="flex flex-col items-center md:items-start gap-4 order-3 md:order-2">
+                    <nav class="flex flex-wrap justify-center md:justify-start gap-4 sm:gap-6">
+                        <a href="#product" class="text-sm text-zinc-500 hover:text-[#FF823C] transition-colors duration-300">Product</a>
+                        <a href="#solution" class="text-sm text-zinc-500 hover:text-[#FF823C] transition-colors duration-300">Solution</a>
+                        <a href="#about" class="text-sm text-zinc-500 hover:text-[#FF823C] transition-colors duration-300">About</a>
+                        <a href="#contact" class="text-sm text-zinc-500 hover:text-[#FF823C] transition-colors duration-300">Contact</a>
+                    </nav>
+                </div>
+                
+                <!-- Right: Social Icons -->
+                <div class="flex justify-center md:justify-end gap-3 sm:gap-4 order-2 md:order-3">
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-lg border border-white/10 bg-white/5 flex items-center justify-center text-zinc-500 hover:text-[#FF823C] hover:border-[#FF823C]/30 transition-all duration-300 group">
+                        <i data-lucide="linkedin" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                    </a>
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-lg border border-white/10 bg-white/5 flex items-center justify-center text-zinc-500 hover:text-[#FF823C] hover:border-[#FF823C]/30 transition-all duration-300 group">
+                        <i data-lucide="github" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-lg border border-white/10 bg-white/5 flex items-center justify-center text-zinc-500 hover:text-[#FF823C] hover:border-[#FF823C]/30 transition-all duration-300 group">
+                        <i data-lucide="twitter" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- Sub-Footer -->
+        <div class="border-t border-white/5">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 py-5 md:py-6 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4">
+                <p class="text-zinc-600 text-sm">
+                    © 2026 AI Vibe Engineer. All rights reserved.
+                </p>
+                <div class="flex items-center gap-6">
+                    <a href="#" class="text-sm text-zinc-600 hover:text-[#FF823C] transition-colors duration-300">Privacy Policy</a>
+                    <a href="#" class="text-sm text-zinc-600 hover:text-[#FF823C] transition-colors duration-300">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Back to Top Button -->
+        <a href="#hero" class="absolute right-4 sm:right-6 bottom-4 sm:bottom-6 w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-[#FF823C] flex items-center justify-center text-white shadow-lg hover:bg-[#e65f00] hover:scale-110 transition-all duration-300 group">
+            <i data-lucide="arrow-up" class="w-5 h-5 group-hover:-translate-y-0.5 transition-transform"></i>
+        </a>
+        
+    </footer>
+
+    <!-- Form Validation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contactForm');
+            const inputs = form.querySelectorAll('input, textarea');
+            
+            // Email validation regex
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            // Validate single field
+            function validateField(field) {
+                const errorElement = field.parentElement.querySelector('.error-message');
+                let isValid = true;
+                
+                // Remove error styling
+                field.classList.remove('border-red-500');
+                
+                if (field.id === 'fullName') {
+                    isValid = field.value.trim().length > 0;
+                } else if (field.id === 'email') {
+                    isValid = emailRegex.test(field.value.trim());
+                } else if (field.id === 'message') {
+                    isValid = field.value.trim().length > 0;
+                }
+                
+                // Show/hide error message
+                if (!isValid && field.value.trim() !== '') {
+                    errorElement.classList.remove('hidden');
+                    field.classList.add('border-red-500');
+                } else {
+                    errorElement.classList.add('hidden');
+                }
+                
+                return isValid;
+            }
+            
+            // Real-time validation on blur
+            inputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    validateField(this);
+                });
+                
+                // Clear error on input
+                input.addEventListener('input', function() {
+                    const errorElement = this.parentElement.querySelector('.error-message');
+                    if (errorElement && !errorElement.classList.contains('hidden')) {
+                        errorElement.classList.add('hidden');
+                        this.classList.remove('border-red-500');
+                    }
+                });
+            });
+            
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                let isFormValid = true;
+                
+                // Validate all fields
+                inputs.forEach(input => {
+                    if (!validateField(input)) {
+                        isFormValid = false;
+                    }
+                });
+                
+                if (isFormValid) {
+                    // Show success message (you can replace this with actual submission)
+                    const submitBtn = form.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.innerHTML;
+                    
+                    submitBtn.innerHTML = '<i data-lucide="check" class="w-5 h-5"></i> Message Sent!';
+                    submitBtn.classList.remove('bg-brand-orange', 'hover:bg-[#e65f00]');
+                    submitBtn.classList.add('bg-green-500', 'hover:bg-green-600');
+                    
+                    // Re-initialize icons
+                    lucide.createIcons();
+                    
+                    // Reset form after 3 seconds
+                    setTimeout(() => {
+                        form.reset();
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.classList.add('bg-brand-orange', 'hover:bg-[#e65f00]');
+                        submitBtn.classList.remove('bg-green-500', 'hover:bg-green-600');
+                        lucide.createIcons();
+                    }, 3000);
+                }
+            });
+            
+            // Re-initialize icons for new elements
+            lucide.createIcons();
+        });
+    </script>
+
+    <!-- Initialize Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+    
+    <!-- Process Section Scroll Animation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Intersection Observer for scroll animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.2
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all process cards
+            const processCards = document.querySelectorAll('.process-card');
+            processCards.forEach((card, index) => {
+                card.style.transitionDelay = `${index * 150}ms`;
+                observer.observe(card);
+            });
+            
+            // Mobile Menu Functionality
+            const burgerBtn = document.getElementById('burgerBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+            const closeMobileMenu = document.getElementById('closeMobileMenu');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+            
+            // Open mobile menu
+            burgerBtn.addEventListener('click', function() {
+                mobileMenu.classList.add('open');
+                mobileMenuOverlay.classList.add('open');
+                burgerBtn.classList.add('burger-open');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Close mobile menu function
+            function closeMenu() {
+                mobileMenu.classList.remove('open');
+                mobileMenuOverlay.classList.remove('open');
+                burgerBtn.classList.remove('burger-open');
+                document.body.style.overflow = '';
+            }
+            
+            // Close mobile menu button
+            closeMobileMenu.addEventListener('click', closeMenu);
+            
+            // Close on overlay click
+            mobileMenuOverlay.addEventListener('click', closeMenu);
+            
+            // Close on nav link click
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', closeMenu);
+            });
+            
+            // Close on escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+                    closeMenu();
+                }
+            });
+        });
+    </script>
+
+</body></html>
